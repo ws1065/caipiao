@@ -1,0 +1,2 @@
+#### <a href="https://www.cnblogs.com/zyw-205520/p/4771253.html" >SSM框架——详细整合教程（Spring+SpringMVC+MyBatis） - 酷玩时刻 - 博客园</a><br>
+#### <a href="https://blog.csdn.net/zhshulin/article/details/23912615"> SSM框架——使用MyBatis Generator自动创建代码"</a>
