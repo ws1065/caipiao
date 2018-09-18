@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- mysql的jar文件路径 -->
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="mergeable" value="false"></property>
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+        </plugin>
+        <!-- 数据库相关配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://10.27.213.67:3306/wy?useUnicode=true&amp;characterEncoding=utf-8"
+                        userId="root"
+                        password="">
+        </jdbcConnection>
+
+        <!-- 配置pojo目录 -->
+        <javaModelGenerator targetPackage="com.example.demo.entity" targetProject="src/main/java">
+        </javaModelGenerator>
+
+        <!-- 配置xml映射目录 -->
+        <sqlMapGenerator targetPackage="com.example.demo.mapper" targetProject="src/main/java">
+        </sqlMapGenerator>
+
+        <!-- 配置dao目录 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.demo.service"
+                             targetProject="src/main/java">
+        </javaClientGenerator>
+
+        <!-- tableName是数据库中的表名，domainObjectName是生成的JAVA模型名-->
+        <table tableName="tbl_city" domainObjectName="City" >
+            <generatedKey column="id" identity="true" sqlStatement="Mysql"></generatedKey>
+        </table>
+    </context>
+</generatorConfiguration>
