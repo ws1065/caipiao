@@ -1,32 +1,17 @@
 package com.wsw;
 
-public class Test_caipiao {
+public class Test_caipiao implements Comparable<Test_caipiao>{
 
     @Override
     public String toString() {
-        return "Test_caipiao{" +
-                "page='" + page + '\'' +
-                ", t1='" + t1 + '\'' +
+        return "t1='" + t1 + '\'' +
                 ", t2='" + t2 + '\'' +
                 ", t3='" + t3 + '\'' +
                 ", t4='" + t4 + '\'' +
                 ", t5='" + t5 + '\'' +
                 ", t6='" + t6 + '\'' +
                 ", t7='" + t7 + '\'' +
-                ", sales_total='" + sales_total + '\'' +
-                ", every_bouns1='" + every_bouns1 + '\'' +
-                ", every_bouns2='" + every_bouns2 + '\'' +
-                ", every_bouns3='" + every_bouns3 + '\'' +
-                ", every_bouns4='" + every_bouns4 + '\'' +
-                ", every_bouns5='" + every_bouns5 + '\'' +
-                ", every_bouns6='" + every_bouns6 + '\'' +
                 ", pool_bouns='" + pool_bouns + '\'' +
-                ", num_bouns1='" + num_bouns1 + '\'' +
-                ", num_bouns2='" + num_bouns2 + '\'' +
-                ", num_bouns3='" + num_bouns3 + '\'' +
-                ", num_bouns4='" + num_bouns4 + '\'' +
-                ", num_bouns5='" + num_bouns5 + '\'' +
-                ", num_bouns6='" + num_bouns6 + '\'' +
                 '}';
     }
 
@@ -228,4 +213,12 @@ public class Test_caipiao {
   public void setNum_bouns6(String num_bouns6) {
     this.num_bouns6 = num_bouns6;
   }
+
+    @Override
+    public int compareTo(Test_caipiao o) {
+
+        return Integer.parseInt(o.getPool_bouns().replaceAll(",",""))
+                -
+                Integer.parseInt(this.getPool_bouns().replaceAll(",",""));
+    }
 }
