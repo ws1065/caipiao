@@ -10,14 +10,23 @@ import java.util.*;
 
 public class Test1 {
 
-    public static List<Test_caipiao> hasCalculator = new ArrayList<>();
+    public static List<Test_caipiao> hasCalculator = new Vector<>();
+    public static Test_caipiao t1000 ;
     //14 01 26 20 22 18     12
     public static void a(String[] args) {
         Test_caipiao inputObj = getInputObj(new String[]{"01", "02", "03", "05", "06", "16", "13"});
         Test_caipiao inputObj1 = getInputObj(new String[]{"01", "02", "03", "05", "16", "06", "13"});
     }
-    public static void main(String[] args) throws IOException {
 
+    public static void main(String[] args) throws IOException {
+        String input="";
+        if (args.length>0) {
+            input  = args[0];
+        }
+        if (input.length()==0) {
+            System.err.println("添加参数abcd");
+            System.exit(0);
+        }
         List<Test_caipiao> list = getHistory();
 
         //测试1
@@ -33,44 +42,48 @@ public class Test1 {
         while (true) {
             t = getAllNum(t);
             //判断这个数字之前计算过没有
-            Test_caipiao inputObj = getInputObj(new String[]{"01", "02", "03", "05", "06", "16", "13"});
-            Test_caipiao inputObj1 = getInputObj(new String[]{"01", "02", "03", "05", "16", "06", "13"});
-            if(!isCalculatored(t)) {
-
-                if (t != null) {
-                    System.out.println(t);
-                    Map<String, String> pageAndTotalBouns = calculator(list, t);
-//                int ismall = printResultSmall(pageAndTotalBouns);
-//                t.setPool_bouns(String.valueOf(ismall));
-//
-//                int ibig = printResultBig(pageAndTotalBouns);
-//                t.setPool_bouns(String.valueOf(ibig));
-//
-//
-//                int inomal = printResultNomal(pageAndTotalBouns);
-//                t.setPool_bouns(String.valueOf(inomal));
-
-                    int zhongjiangnum = printResultNum(pageAndTotalBouns);
-                    t.setPool_bouns(String.valueOf(zhongjiangnum));
-                    System.out.println(t);
-                    num.add(t);
-
-                    if (num.size() > 10000) {
-                        sortList(num);
-
-                        ArrayList<Test_caipiao> num1 = new ArrayList<>();
-                        for (int i1 = 0; i1 < 1000; i1++) {
-                            num1.add(num.get(i1));
-                        }
-                        num = num1;
-                    }
-                } else {
-                    sortList(num);
-                    for (Test_caipiao test_caipiao : num) {
-                        System.out.println(test_caipiao.getPool_bouns() + ":" + test_caipiao);
-                    }
-                    System.exit(0);
+            if (t != null) {
+                Map<String, String> pageAndTotalBouns = calculator(list, t);
+                switch (input) {
+                    case "a":
+                        int ismall = printResultSmall(pageAndTotalBouns);
+                        t.setPool_bouns(String.valueOf(ismall));
+                        break;
+                    case "b":
+                        int inomal = printResultNomal(pageAndTotalBouns);
+                        t.setPool_bouns(String.valueOf(inomal));break;
+                    case "c":
+                        int ibig = printResultBig(pageAndTotalBouns);
+                        t.setPool_bouns(String.valueOf(ibig));break;
+                    case "d":
+                        int zhongjiangnum = printResultNum(pageAndTotalBouns);
+                        t.setPool_bouns(String.valueOf(zhongjiangnum));break;
                 }
+
+//
+//
+
+                if (t1000!=null && Integer.parseInt(t1000.getPool_bouns())>Integer.parseInt(t.getPool_bouns())) continue;
+                num.add(t);
+                if (num.size() > 10000) {
+                    System.out.println(num.get(10000));
+                    Collections.sort(num);
+                    System.out.println(num.get(0));
+                    System.out.println();
+
+                    ArrayList<Test_caipiao> num1 = new ArrayList<>();
+                    for (int i1 = 0; i1 < 1000; i1++) {
+                        num1.add(num.get(i1));
+                    }
+                    t1000 = num.get(1000);
+                    num = num1;
+                }
+            } else {
+                Collections.sort(num);
+                for (Test_caipiao test_caipiao : num) {
+                    System.out.println(test_caipiao.getPool_bouns() + ":" + test_caipiao);
+                }
+                System.exit(0);
             }
         }
 
@@ -328,7 +341,7 @@ public class Test1 {
     }
 
     public static Test_caipiao getAllNum(Test_caipiao t) {
-
+        t = clone(t);
 
         if (Integer.parseInt(t.getT1()) == 34){
             //最大后退出
